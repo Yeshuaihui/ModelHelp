@@ -1,23 +1,23 @@
 {
   "Conections": {
-    "106.14.45.167:1433": {
-      "address": "106.14.45.167",
+    "127.0.0.1:1433": {
+      "address": "127.0.0.1",
       "prot": 1433,
-      "userName": "travelplay",
-      "pwd": "8PT2017",
+      "userName": "sa",
+      "pwd": "sa",
       "serverType": "Sql Server",
-      "nameSpace": "ETP.Enterprise.Model"
+      "nameSpace": "模型前缀"
     },
-    "106.14.45.167:3306": {
-      "address": "106.14.45.167",
+    "127.0.0.1:3306": {
+      "address": "127.0.0.1",
       "prot": 3306,
-      "userName": "travelpay",
-      "pwd": "EPT2019",
+      "userName": "root",
+      "pwd": "pwd",
       "serverType": "MySql",
-      "nameSpace": "ETP.Manage.CRM.Model"
+      "nameSpace": "xxx.xx.xxx.Model"
     },
-    "192.168.30.181:3306": {
-      "address": "192.168.30.181",
+    "127.0.0.1:3306": {
+      "address": "127.0.0.1",
       "prot": 3306,
       "userName": "sa",
       "pwd": "sa",
