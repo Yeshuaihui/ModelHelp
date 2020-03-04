@@ -46,3 +46,5 @@ System.Numerics.Vectors.xml
 System.Runtime.CompilerServices.Unsafe.4.5.2.nupkg
 System.Runtime.CompilerServices.Unsafe.dll
 System.Runtime.CompilerServices.Unsafe.xml
+bin
+obj
