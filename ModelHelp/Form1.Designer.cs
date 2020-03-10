@@ -46,6 +46,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.chbCreateRepository = new System.Windows.Forms.CheckBox();
             this.chbCreateService = new System.Windows.Forms.CheckBox();
+            this.chkSqlHelp = new System.Windows.Forms.CheckBox();
+            this.labSlhelp = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtHost
@@ -190,7 +192,7 @@
             // chbCreateRepository
             // 
             this.chbCreateRepository.AutoSize = true;
-            this.chbCreateRepository.Location = new System.Drawing.Point(191, 355);
+            this.chbCreateRepository.Location = new System.Drawing.Point(191, 380);
             this.chbCreateRepository.Name = "chbCreateRepository";
             this.chbCreateRepository.Size = new System.Drawing.Size(84, 16);
             this.chbCreateRepository.TabIndex = 61;
@@ -200,18 +202,42 @@
             // chbCreateService
             // 
             this.chbCreateService.AutoSize = true;
-            this.chbCreateService.Location = new System.Drawing.Point(191, 391);
+            this.chbCreateService.Location = new System.Drawing.Point(191, 416);
             this.chbCreateService.Name = "chbCreateService";
             this.chbCreateService.Size = new System.Drawing.Size(84, 16);
             this.chbCreateService.TabIndex = 62;
             this.chbCreateService.Text = "生成服务类";
             this.chbCreateService.UseVisualStyleBackColor = true;
             // 
+            // chkSqlHelp
+            // 
+            this.chkSqlHelp.AutoSize = true;
+            this.chkSqlHelp.Location = new System.Drawing.Point(191, 346);
+            this.chkSqlHelp.Name = "chkSqlHelp";
+            this.chkSqlHelp.Size = new System.Drawing.Size(90, 16);
+            this.chkSqlHelp.TabIndex = 63;
+            this.chkSqlHelp.Text = "继承Sql帮助";
+            this.chkSqlHelp.UseVisualStyleBackColor = true;
+            this.chkSqlHelp.MouseHover += new System.EventHandler(this.chkSqlHelp_MouseHover);
+            // 
+            // labSlhelp
+            // 
+            this.labSlhelp.AutoSize = true;
+            this.labSlhelp.ForeColor = System.Drawing.Color.Red;
+            this.labSlhelp.Location = new System.Drawing.Point(61, 333);
+            this.labSlhelp.Name = "labSlhelp";
+            this.labSlhelp.Size = new System.Drawing.Size(389, 12);
+            this.labSlhelp.TabIndex = 64;
+            this.labSlhelp.Text = "不同数据库将继承不同数据库基类，基类中包含生成增删改查的语句函数";
+            this.labSlhelp.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(485, 586);
+            this.ClientSize = new System.Drawing.Size(484, 586);
+            this.Controls.Add(this.labSlhelp);
+            this.Controls.Add(this.chkSqlHelp);
             this.Controls.Add(this.chbCreateService);
             this.Controls.Add(this.chbCreateRepository);
             this.Controls.Add(this.label7);
@@ -257,6 +283,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox chbCreateRepository;
         private System.Windows.Forms.CheckBox chbCreateService;
+        private System.Windows.Forms.CheckBox chkSqlHelp;
+        private System.Windows.Forms.Label labSlhelp;
     }
 }
 

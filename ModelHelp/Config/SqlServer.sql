@@ -23,7 +23,7 @@ set @AllClass=@AllClass+'\n'+'{'
 set @AllClass=@AllClass+'\n'+'    using System.ComponentModel.DataAnnotations;'
 set @AllClass=@AllClass+'\n'+'    using System;'
 set @AllClass=@AllClass+'\n'+'    [Serializable]'
-set @AllClass=@AllClass+'\n'+'    public partial class '+@tablename
+set @AllClass=@AllClass+'\n'+'    public partial class '+@tablename+'{$BaseModel}'
 set @AllClass=@AllClass+'\n'+'    {'
 
 while @@fetch_status=0  --提取成功，进行下一条数据的提取操作 

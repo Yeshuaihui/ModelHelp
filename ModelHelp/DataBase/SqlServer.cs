@@ -16,8 +16,9 @@ namespace ModelHelp.DataBase
         {
         }
 
-        public override string CreateClassFile(List<string> TableNames, string dataBaseName, string NameSpace = "")
+        public override string CreateClassFile(List<string> TableNames, string dataBaseName, bool sqlBase, string NameSpace = "")
         {
+            base.CreateClassFile(TableNames, dataBaseName, sqlBase, NameSpace);
             string basePath = AppDomain.CurrentDomain.BaseDirectory + "DataBase\\SqlServer\\";
             SqlConnection connDb2 = getSqlConnection(dataBaseName);
             string sql = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "Config\\SqlServer.sql");
@@ -26,6 +27,14 @@ namespace ModelHelp.DataBase
             foreach (string table in TableNames)
             {
                 string execSql = sql.Replace("{$TableName}", table + "").Replace("{$NameSpace}", NameSpace);
+                if (sqlBase)
+                {
+                    execSql = execSql.Replace("{$BaseModel}", ":SqlServerBaseModel");
+                }
+                else
+                {
+                    execSql = execSql.Replace("{$BaseModel}", "");
+                }
                 SqlCommand cmd = new SqlCommand(execSql, connDb2);
                 cmd.CommandTimeout = 50000;
                 string ClassFIle = cmd.ExecuteScalar() + "";

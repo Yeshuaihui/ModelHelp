@@ -1,23 +1,23 @@
 {
   "Conections": {
-    "127.0.0.1:1433": {
-      "address": "127.0.0.1",
+    "106.14.45.167:1433": {
+      "address": "106.14.45.167",
       "prot": 1433,
-      "userName": "sa",
-      "pwd": "sa",
+      "userName": "travelplay",
+      "pwd": "8PT2017",
       "serverType": "Sql Server",
-      "nameSpace": "模型前缀"
+      "nameSpace": ""
     },
-    "127.0.0.1:3306": {
-      "address": "127.0.0.1",
+    "106.14.45.167:3306": {
+      "address": "106.14.45.167",
       "prot": 3306,
-      "userName": "root",
-      "pwd": "pwd",
+      "userName": "travelpay",
+      "pwd": "EPT2019",
       "serverType": "MySql",
-      "nameSpace": "xxx.xx.xxx.Model"
+      "nameSpace": "ETP.Manage.CRM.Model"
     },
-    "127.0.0.1:3306": {
-      "address": "127.0.0.1",
+    "192.168.30.181:3306": {
+      "address": "192.168.30.181",
       "prot": 3306,
       "userName": "sa",
       "pwd": "sa",
@@ -27,14 +27,12 @@
   },
   "MysqlType": {
     "int": "int",
-    "bigint": "long",
     "varchar": "string",
     "bit": "bool",
-    "datetime": "DateTime",
-    "date": "DateTime",
-    "double": "double",
-    "numeric": "decimal",
-    "time": "DateTime"
+    "datetime": "DateTime"
   },
-  "NoReadDB": ["ReportServer", "ReportServerTempDB"]
+  "NoReadDB": [
+    "ReportServer",
+    "ReportServerTempDB"
+  ]
 }

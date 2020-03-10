@@ -20,8 +20,9 @@ namespace ModelHelp.DataBase
             configModel = ConfigModel.Config;
         }
 
-        public override string CreateClassFile(List<string> TableNames, string dataBaseName, string NameSpace = "")
+        public override string CreateClassFile(List<string> TableNames, string dataBaseName, bool sqlBase, string NameSpace = "")
         {
+            base.CreateClassFile(TableNames, dataBaseName, sqlBase, NameSpace);
             string basePath = AppDomain.CurrentDomain.BaseDirectory + "DataBase\\MySql\\";
             MySqlConnection connDb2 = getSqlConnection();
             string sql = "select `TABLE_SCHEMA`,`TABLE_NAME`,`COLUMN_NAME`,`COLUMN_TYPE`,`COLUMN_COMMENT`, `IS_NULLABLE`,`DATA_TYPE` from information_schema.columns where table_schema not in ('information_schema','mysql','performance_schema','sqlwave_pa','sys')";
@@ -47,15 +48,16 @@ namespace ModelHelp.DataBase
             TableNames.ForEach(table =>
             {
                 List<DbColumn> columns = dbColumns.Where(x => x.TABLE_NAME == table&&x.TABLE_SCHEMA==dataBaseName).ToList();
-                StringBuilder ClassFIle = new StringBuilder("namespace " + NameSpace+ columns.FirstOrDefault()?.TABLE_SCHEMA + "\n{\n\tusing System.ComponentModel.DataAnnotations;\n\tusing System;\n\t/// <summary>\n\t///"+ dbTables .FirstOrDefault(x=>x.DbName== dataBaseName&&x.TableName== table).TableDescription + "\n\t/// </summary>\n\t[Serializable]\n\tpublic partial class " + table + "\n\t{\n");
-                string sqlPRIMARY = "SELECT column_name  FROM INFORMATION_SCHEMA.`KEY_COLUMN_USAGE`  WHERE table_name = '" + table + "' AND CONSTRAINT_SCHEMA = '" + columns.FirstOrDefault()?.TABLE_SCHEMA + "' AND constraint_name = 'PRIMARY'";
+                StringBuilder ClassFIle = new StringBuilder(
+                    $"namespace  {NameSpace}{columns.FirstOrDefault()?.TABLE_SCHEMA}\n{{\n\tusing System.ComponentModel.DataAnnotations;\n\tusing System;\n\t/// <summary>\n\t///{dbTables.FirstOrDefault(x => x.DbName == dataBaseName && x.TableName == table).TableDescription}\n\t/// </summary>\n\t[Serializable]\n\tpublic partial class {table}{(sqlBase ? ":MySqlBaseModel" : "")}\n\t{{\n");                
+                string sqlPRIMARY = $"SELECT column_name  FROM INFORMATION_SCHEMA.`KEY_COLUMN_USAGE`  WHERE table_name = '{table}' AND CONSTRAINT_SCHEMA = '{ columns.FirstOrDefault()?.TABLE_SCHEMA}' AND onstraint_name = 'PRIMARY'";
                 MySqlCommand sqlCommand = new MySqlCommand(sqlPRIMARY, connDb2);
                 connDb2.Open();
                 string PRIMARY = sqlCommand.ExecuteScalar() + "";
                 connDb2.Close();
                 columns.ForEach(column =>
                 {
-                    ClassFIle.Append("\t\t/// <summary>\n\t\t///" + column.COLUMN_COMMENT + "\n\t\t/// </summary>\n");
+                    ClassFIle.Append($"\t\t/// <summary>\n\t\t///{column.COLUMN_COMMENT}\n\t\t/// </summary>\n");
                     if (column.COLUMN_NAME == PRIMARY)
                     {
                         ClassFIle.Append("\t\t[Key]\n");
@@ -74,7 +76,7 @@ namespace ModelHelp.DataBase
                     {
                         type += "?";
                     }
-                    ClassFIle.Append("        public " + type + " " + column.COLUMN_NAME + " {get;set;}\n");
+                    ClassFIle.Append($"        public {type} {column.COLUMN_NAME} {{get;set;}}\n");
                 });
                 ClassFIle.Append("\n\t}\n}");
                 if (File.Exists(basePath + dataBaseName + "\\" + table + ".cs"))

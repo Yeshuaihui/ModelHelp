@@ -2,21 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ModelHelp.Model
 {
+    /// <summary>
+    /// 配置模型
+    /// </summary>
     public class ConfigModel
     {
         static ConfigModel config;
-      public  static ConfigModel Config
+        /// <summary>
+        /// 配置对象
+        /// </summary>
+        public static ConfigModel Config
         {
-            get {
+            get
+            {
                 Load();
-                return config; 
-                }
+                return config;
+            }
         }
         /// <summary>
         /// 配置
@@ -26,7 +30,7 @@ namespace ModelHelp.Model
         /// <summary>
         /// MysqlType
         /// </summary>
-        public Dictionary<string,string> MysqlType { get; set; }
+        public Dictionary<string, string> MysqlType { get; set; }
         /// <summary>
         /// 不读取的数据库
         /// </summary>
@@ -42,6 +46,11 @@ namespace ModelHelp.Model
             }
             return config;
         }
+        /// <summary>
+        /// 保存配置对象
+        /// </summary>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public static bool Save(ConfigModel config)
         {
             try

@@ -10,6 +10,6 @@ namespace ModelHelp
     {
         List<string> getDataBaseName();
         List<string> getTableNameByDataBase(string dataBaseName);
-        string CreateClassFile(List<string> TableNames, string dataBaseName, string NameSpace = "");
+        string CreateClassFile(List<string> TableNames, string dataBaseName,bool sqlBase, string NameSpace = "");
     }
 }
