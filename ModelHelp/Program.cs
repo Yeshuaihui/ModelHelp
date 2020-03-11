@@ -15,7 +15,7 @@ namespace ModelHelp
         [STAThread]
         static void Main()
         {
-            T_Hotel t_Hotel = new T_Hotel();
+            //T_Hotel t_Hotel = new T_Hotel();
 
             //t_Hotel.Hotelname = "测试酒店";
             //t_Hotel.BrandId = 123;
