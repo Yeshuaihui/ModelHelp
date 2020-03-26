@@ -27,13 +27,13 @@ namespace ModelHelp
             {
                 if (labSlhelp.Visible)
                 {
-                    MessageSeconds<Label> messageDTO = new MessageSeconds<Label>(x =>
+                    Delay.DelayDo(x =>
                     {
-                        Invoke(new Action<Label>((k) =>
+                        Invoke(new Action(() =>
                         {
-                            k.Visible = false;
+                            x.Visible = false;
                         }), labSlhelp);
-                    }, labSlhelp, DateTime.Now.AddSeconds(10));
+                    }, labSlhelp, 10);
                 }
             };
         }
