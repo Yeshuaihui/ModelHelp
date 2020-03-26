@@ -55,22 +55,23 @@ namespace ModelHelp
                     break;
             }
             string path = "";
-            List<Task> alltask = new List<Task>();
-
+            TaskWait taskWait = new TaskWait()
+            {
+                OneTime = 5
+            };
             List<string> DbNames = Server.getDataBaseName();
             DbNames.ForEach(dbName =>
             {
                 List<string> tables = Server.getTableNameByDataBase(dbName);
-                alltask.Add(
-                    Task.Run(() =>
-                    {
-                        path = Server.CreateClassFile(tables, dbName, chkSqlHelp.Checked, txtNameSpace.Text == "" ? "" : txtNameSpace.Text + ".");
-                    })
-                );
+                taskWait.AddTask(new Task(() =>
+                {
+                    path = Server.CreateClassFile(tables, dbName, chkSqlHelp.Checked, txtNameSpace.Text == "" ? "" : txtNameSpace.Text + ".");
+                }));
             });
             Task.Run(() =>
             {
-                Task.WaitAll(alltask.ToArray());
+                taskWait.Run();
+                taskWait.Wait();
                 Invoke(new Action(()=> {
                     System.Diagnostics.Process.Start("explorer", path);
                     MessageBox.Show("所有文件已创建完成");

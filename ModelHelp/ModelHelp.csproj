@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TaskWait.cs" />
     <Compile Include="DataBase\base\Base.cs" />
     <Compile Include="DataBase\base\IBase.cs" />
     <Compile Include="DataBase\MySql.cs" />
@@ -100,7 +101,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="MessageMinutes.cs" />
+    <Compile Include="Delay.cs" />
     <Compile Include="Model\ConfigModel.cs" />
     <Compile Include="Model\ConnectionModel.cs" />
     <Compile Include="Program.cs" />
