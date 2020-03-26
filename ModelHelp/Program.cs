@@ -15,13 +15,16 @@ namespace ModelHelp
         [STAThread]
         static void Main()
         {
-            //T_Hotel t_Hotel = new T_Hotel();
+            T_Hotel t_Hotel = new T_Hotel();
 
-            //t_Hotel.Hotelname = "测试酒店";
-            //t_Hotel.BrandId = 123;
-            //t_Hotel.Hotelname = "冈山格兰比亚酒店";
+            t_Hotel.BrandId = 123;
+            t_Hotel.Hotelname = "冈山格兰比亚酒店";
             //string sql = t_Hotel.InsertSql();
-            //string sql2 = t_Hotel.UpdateSql<T_Hotel>(x => x.Id == 189442 && x.Wellness == false);
+            List<int> ids = new List<int>()
+            {
+                1,2,3,4,5,6
+            };
+            string sql2 = t_Hotel.UpdateSql<T_Hotel>(x => ids.Contains(x.Id));
 
 
             Application.EnableVisualStyles();

@@ -8,7 +8,7 @@ namespace Ysh.CreateSql
     public static class ExpressionExtend
     {
         //操作符转换
-        public static string TransferOperand(this ExpressionType type)
+        public static string TransferOperand(this ExpressionType type,string method="")
         {
             string operand = string.Empty;
             switch (type)
@@ -36,6 +36,14 @@ namespace Ysh.CreateSql
                     break;
                 case ExpressionType.GreaterThanOrEqual:
                     operand = ">=";
+                    break;
+                case ExpressionType.Call:
+                    switch (method)
+                    {
+                        case "Contains":
+                            operand = "in";
+                            break;
+                    }
                     break;
             }
             return operand;

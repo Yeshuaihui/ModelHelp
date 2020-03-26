@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -27,6 +28,16 @@ namespace Ysh.CreateSql
             Visit(node.Right);
             if (node.NodeType == ExpressionType.OrElse)
                 express.Append(")");
+            return node;
+        }
+        protected override Expression VisitMethodCall(MethodCallExpression node)
+        {
+            if(node.NodeType==ExpressionType.Call&&node.Method.Name== "Contains")
+            {
+                Visit(node.Arguments.FirstOrDefault());
+                express.Append($" {node.NodeType.TransferOperand(node.Method.Name)} ");
+                Visit(node.Object);
+            }
             return node;
         }
 

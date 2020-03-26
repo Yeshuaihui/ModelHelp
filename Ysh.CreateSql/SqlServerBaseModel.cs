@@ -6,17 +6,30 @@ namespace Ysh.CreateSql
 {
     public class SqlServerBaseModel : BaseModel
     {
-        public SqlServerBaseModel()
-        {
-        }
+        /// <summary>
+        /// 生成删除语句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public override string DeleteSql<T>(Expression<Func<T, bool>> predicate)
         {
             return $"delete {ThisName} " + Where(predicate);
         }
+        /// <summary>
+        /// 生成查询语句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public override string SelectSql<T>(Expression<Func<T, bool>> predicate)
         {
             return $"select * from {ThisName}" + Where(predicate);
         }
+        /// <summary>
+        /// 生成插入语句
+        /// </summary>
+        /// <returns></returns>
         public override string InsertSql()
         {
             if (changePV.Count > 0)
@@ -28,6 +41,12 @@ namespace Ysh.CreateSql
                 throw new Exception("没有任何属性值改变，无法生成Sql");
             }
         }
+        /// <summary>
+        /// 生成更新语句
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public override string UpdateSql<T>(Expression<Func<T, bool>> predicate)
         {
             if (changePV.Count > 0)
@@ -47,8 +66,5 @@ namespace Ysh.CreateSql
                 throw new Exception("没有任何属性值改变，无法生成Sql");
             }
         }
-
-
-
     }
 }

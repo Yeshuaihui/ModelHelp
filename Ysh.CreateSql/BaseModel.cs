@@ -63,17 +63,15 @@ namespace Ysh.CreateSql
         }
 
         public abstract string InsertSql();
-        public abstract string UpdateSql<T>(Expression<Func<T, bool>> predicate) where T:BaseModel;
+        public abstract string UpdateSql<T>(Expression<Func<T, bool>> predicate) where T : BaseModel;
         public abstract string DeleteSql<T>(Expression<Func<T, bool>> predicate) where T : BaseModel;
         public abstract string SelectSql<T>(Expression<Func<T, bool>> predicate) where T : BaseModel;
-
-        public virtual string Where<T>(Expression<Func<T, bool>> predicate)
+        protected virtual string Where<T>(Expression<Func<T, bool>> predicate)
         {
             var heler = new AnalyseExpressionHelper();
             heler.AnalyseExpression(predicate);
             return $" where {heler.Result}";
         }
-
 
         protected string ThisName
         {
@@ -81,7 +79,7 @@ namespace Ysh.CreateSql
             {
                 if (string.IsNullOrWhiteSpace(thisName))
                 {
-                    thisName= GetType().Name;
+                    thisName = GetType().Name;
                 }
                 return GetType().Name;
             }
